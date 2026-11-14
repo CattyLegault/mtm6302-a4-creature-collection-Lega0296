@@ -45,7 +45,56 @@ const layout = document.getElementById("layout");
 const theme = document.getElementById("theme");
 const collection = document.getElementById("collection");
 
+const html = [];
+
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
+for (const creature of $creatures) {
+  html.push(`
+    <li class="creature-card">
+      <img src="${creature.image}" alt="${creature.alt}">
+      <h3>${creature.name}</h3>
+      <p>${creature.description}</p>
+    </li>
+  `);
+}
+collection.innerHTML = html.join("");
+
+collection.addEventListener("click", (event) => {
+  if (event.target.tagName === "IMG") {
+    const selectedCreature = event.target.closest(".creature-card");
+  }
+});
+
+theme.addEventListener("change", (event) => {
+  const selectedTheme = event.target.value;
+  document.body.setAttribute("data-theme", selectedTheme);
+  localStorage.setItem("selectedTheme", selectedTheme);
+});
+
+layout.addEventListener("change", (event) => {
+  const selectedLayout = event.target.value;
+  collection.setAttribute("data-layout", selectedLayout);
+  localStorage.setItem("selectedLayout", selectedLayout);
+});
+
+const savedTheme = localStorage.getItem("selectedTheme");
+if (savedTheme) {
+  document.body.setAttribute("data-theme", savedTheme);
+  theme.value = savedTheme;
+} else {
+  document.body.setAttribute("data-theme", "light");
+  theme.value = "light";
+}
+
+const savedLayout = localStorage.getItem("selectedLayout");
+if (savedLayout) {
+  collection.setAttribute("data-layout", savedLayout);
+  layout.value = savedLayout;
+} else {
+  collection.setAttribute("data-layout", "grid");
+  layout.value = "grid";
+}
+
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
 // 5. Check for saved data on load and restore the controls and appearance.
