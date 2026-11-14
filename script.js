@@ -95,6 +95,8 @@ if (savedLayout) {
   layout.value = "grid";
 }
 
+console.log("Script loaded successfully.");
+
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
 // 5. Check for saved data on load and restore the controls and appearance.
