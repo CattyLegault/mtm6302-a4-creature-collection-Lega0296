@@ -1,45 +1,50 @@
 // PROVIDED: use this collection to generate the entries.
 const $creatures = [
   {
-    "name": "Moss Dragon",
-    "description": "A gentle gardener who grows tiny forests wherever it naps.",
-    "image": "assets/moss-dragon.svg",
-    "alt": "A green dragon with leafy horns and small wings."
+    name: "Moss Dragon",
+    description: "A gentle gardener who grows tiny forests wherever it naps.",
+    image: "assets/moss-dragon.svg",
+    alt: "A green dragon with leafy horns and small wings.",
   },
   {
-    "name": "Cloud Fox",
-    "description": "A sky wanderer collecting soft clouds and lost daydreams.",
-    "image": "assets/cloud-fox.svg",
-    "alt": "A pale blue fox with pointed ears and a fluffy tail."
+    name: "Cloud Fox",
+    description: "A sky wanderer collecting soft clouds and lost daydreams.",
+    image: "assets/cloud-fox.svg",
+    alt: "A pale blue fox with pointed ears and a fluffy tail.",
   },
   {
-    "name": "Ember Salamander",
-    "description": "A warm little companion that keeps campfires glowing.",
-    "image": "assets/ember-salamander.svg",
-    "alt": "An orange salamander with a flame at the end of its tail."
+    name: "Ember Salamander",
+    description: "A warm little companion that keeps campfires glowing.",
+    image: "assets/ember-salamander.svg",
+    alt: "An orange salamander with a flame at the end of its tail.",
   },
   {
-    "name": "Moon Owl",
-    "description": "A quiet navigator who reads the stories written in stars.",
-    "image": "assets/moon-owl.svg",
-    "alt": "A purple owl with a crescent moon on its forehead."
+    name: "Moon Owl",
+    description: "A quiet navigator who reads the stories written in stars.",
+    image: "assets/moon-owl.svg",
+    alt: "A purple owl with a crescent moon on its forehead.",
   },
   {
-    "name": "Crystal Turtle",
-    "description": "A patient explorer carrying a sparkling crystal garden.",
-    "image": "assets/crystal-turtle.svg",
-    "alt": "A mint green turtle with purple crystals on its shell."
+    name: "Crystal Turtle",
+    description: "A patient explorer carrying a sparkling crystal garden.",
+    image: "assets/crystal-turtle.svg",
+    alt: "A mint green turtle with purple crystals on its shell.",
   },
   {
-    "name": "Mushroom Sprite",
-    "description": "A woodland storyteller with a spotted cap and muddy boots.",
-    "image": "assets/mushroom-sprite.svg",
-    "alt": "A small cream sprite wearing a red spotted mushroom cap."
-  }
-]
+    name: "Mushroom Sprite",
+    description: "A woodland storyteller with a spotted cap and muddy boots.",
+    image: "assets/mushroom-sprite.svg",
+    alt: "A small cream sprite wearing a red spotted mushroom cap.",
+  },
+];
 
 // YOUR WORK: build these features using the supplied HTML, CSS, and data.
 // 1. Select the collection and preference controls.
+const $preferences = document.getElementById("preferences-title");
+const layout = document.getElementById("layout");
+const theme = document.getElementById("theme");
+const collection = document.getElementById("collection");
+
 // 2. Use a loop to generate the creature entries. See START-HERE.md for markup.
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
