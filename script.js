@@ -126,22 +126,17 @@ async function fetchData() {
   // try to fetch the data and handle any errors that may occur
   try {
     const response = await fetch("data/creatures.json");
-    const creatures = await response.json();
-    if (!Array.isArray(creatures)) {
-      throw new Error("Fetched data is not an array.");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const creatures = await response.json();
+
     // Process the fetched data
   } catch (error) {
     console.error("Error fetching creature data:", error);
   }
   if (creatures && creatures.length > 0) {
     // Process the fetched data and update the collection
-    const html = creatures;
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const creatures = await response.json();
 
     collection.innerHTML = creatures
       .map(
@@ -154,7 +149,6 @@ async function fetchData() {
     `,
       )
       .join("");
-    collection.innerHTML = html;
 
     try {
       // Save the fetched data to Local Storage
