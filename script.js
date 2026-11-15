@@ -131,10 +131,6 @@ async function fetchData() {
 
   const creaturesData = await response.json();
 
-  catch (error) {
-    console.error("Failed to fetch data:", error);
-  }
-
   if (creaturesData.length > 0) {
     collection.innerHTML = creaturesData
       .map(
