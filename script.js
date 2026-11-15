@@ -57,6 +57,7 @@ for (const creature of $creatures) {
     </li>
   `);
 }
+// convert the array of HTML strings into a single string and set it as the innerHTML of the collection
 collection.innerHTML = html.join("");
 
 // add an event listener to the collection to handle clicks on creature images
@@ -68,12 +69,15 @@ collection.addEventListener("click", (event) => {
   }
 });
 
+// add event listeners to the theme and layout controls to update the appearance and save preferences
+
 theme.addEventListener("change", (event) => {
   const selectedTheme = event.target.value;
   document.body.setAttribute("data-theme", selectedTheme);
   localStorage.setItem("selectedTheme", selectedTheme);
 });
 
+// add an event listener to the layout control to update the collection layout and save the preference
 layout.addEventListener("change", (event) => {
   const selectedLayout = event.target.value;
   collection.setAttribute("data-layout", selectedLayout);
@@ -90,6 +94,8 @@ if (savedTheme) {
   theme.value = "light";
 }
 
+// Check for saved layout preference in Local Storage and apply it on page load
+
 const savedLayout = localStorage.getItem("selectedLayout");
 if (savedLayout) {
   collection.setAttribute("data-layout", savedLayout);
@@ -101,6 +107,7 @@ if (savedLayout) {
 
 // fetch data from a JSON file and process it
 async function fetchData() {
+  // try to fetch the data and handle any errors that may occur
   try {
     const response = await fetch("data/creatures.json");
     const creatures = await response.json();
