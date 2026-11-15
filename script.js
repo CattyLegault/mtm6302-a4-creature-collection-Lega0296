@@ -99,6 +99,7 @@ if (savedLayout) {
   layout.value = "grid";
 }
 
+// fetch data from a JSON file and process it
 async function fetchData() {
   try {
     const response = await fetch("data/creatures.json");
