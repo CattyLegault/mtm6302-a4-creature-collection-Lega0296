@@ -89,6 +89,7 @@ const savedTheme = localStorage.getItem("selectedTheme");
 if (savedTheme) {
   document.body.setAttribute("data-theme", savedTheme);
   theme.value = savedTheme;
+  //  else, set the default theme to light if no saved preference is found
 } else {
   document.body.setAttribute("data-theme", "light");
   theme.value = "light";
@@ -100,10 +101,18 @@ const savedLayout = localStorage.getItem("selectedLayout");
 if (savedLayout) {
   collection.setAttribute("data-layout", savedLayout);
   layout.value = savedLayout;
+  // else, set the default layout to grid if no saved preference is found
 } else {
   collection.setAttribute("data-layout", "grid");
   layout.value = "grid";
 }
+
+// Create an object to store the saved preferences for theme and layout, using the saved values or default values if none are found
+
+const savedPreferences = {
+  theme: savedTheme || "light",
+  layout: savedLayout || "grid",
+};
 
 // fetch data from a JSON file and process it
 async function fetchData() {
@@ -115,13 +124,20 @@ async function fetchData() {
   } catch (error) {
     console.error("Error fetching creature data:", error);
   }
+
+  const response = await fetch("data/creatures.json");
+  const creatures = await response.json();
+  console.log("Fetched creatures:", creatures);
 }
+
+fetchData();
 
 // console.log statements to verify that the script is loaded and preferences are applied
 
 console.log("Script loaded successfully.");
 console.log("Saved theme:", savedTheme);
 console.log("Saved layout:", savedLayout);
+console.log("Saved preferences:", savedPreferences);
 
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
