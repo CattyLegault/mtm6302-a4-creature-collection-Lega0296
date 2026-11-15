@@ -120,18 +120,30 @@ async function fetchData() {
   if (!window.fetch) {
     console.error("Fetch API is not supported in this browser.");
     return;
+  } else {
+    console.log("Fetch API is supported in this browser.");
   }
   // try to fetch the data and handle any errors that may occur
   try {
     const response = await fetch("data/creatures.json");
     const creatures = await response.json();
+    if (!Array.isArray(creatures)) {
+      throw new Error("Fetched data is not an array.");
+    }
     // Process the fetched data
   } catch (error) {
     console.error("Error fetching creature data:", error);
   }
   if (creatures && creatures.length > 0) {
     // Process the fetched data and update the collection
-    const html = creatures
+    const html = creatures;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const creatures = await response.json();
+
+    collection.innerHTML = creatures
       .map(
         (creature) => `
       <li class="creature-card">
