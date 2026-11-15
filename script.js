@@ -59,9 +59,12 @@ for (const creature of $creatures) {
 }
 collection.innerHTML = html.join("");
 
+// add an event listener to the collection to handle clicks on creature images
+
 collection.addEventListener("click", (event) => {
   if (event.target.tagName === "IMG") {
     const selectedCreature = event.target.closest(".creature-card");
+    console.log("Selected creature:", selectedCreature);
   }
 });
 
@@ -77,6 +80,7 @@ layout.addEventListener("change", (event) => {
   localStorage.setItem("selectedLayout", selectedLayout);
 });
 
+// Check for saved preferences in Local Storage and apply them on page load
 const savedTheme = localStorage.getItem("selectedTheme");
 if (savedTheme) {
   document.body.setAttribute("data-theme", savedTheme);
@@ -95,7 +99,21 @@ if (savedLayout) {
   layout.value = "grid";
 }
 
+async function fetchData() {
+  try {
+    const response = await fetch("data/creatures.json");
+    const creatures = await response.json();
+    // Process the fetched data
+  } catch (error) {
+    console.error("Error fetching creature data:", error);
+  }
+}
+
+// console.log statements to verify that the script is loaded and preferences are applied
+
 console.log("Script loaded successfully.");
+console.log("Saved theme:", savedTheme);
+console.log("Saved layout:", savedLayout);
 
 // 3. Listen for changes to each preference control and update the appearance.
 // 4. Save both selected preferences to Local Storage.
