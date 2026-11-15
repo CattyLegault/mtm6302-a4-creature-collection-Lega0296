@@ -120,25 +120,23 @@ async function fetchData() {
   if (!window.fetch) {
     console.error("Fetch API is not supported in this browser.");
     return;
-  } else {
-    console.log("Fetch API is supported in this browser.");
   }
-  // try to fetch the data and handle any errors that may occur
-  try {
-    const response = await fetch("data/creatures.json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const creatures = await response.json();
+  console.log("Fetching data from data.json...");
 
-    // Process the fetched data
-  } catch (error) {
-    console.error("Error fetching creature data:", error);
+  // fetch the data from the JSON file and handle errors
+  const response = await window.fetch("data.json");
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
-  if (creatures && creatures.length > 0) {
-    // Process the fetched data and update the collection
 
-    collection.innerHTML = creatures
+  const creaturesData = await response.json();
+
+  catch (error) {
+    console.error("Failed to fetch data:", error);
+  }
+
+  if (creaturesData.length > 0) {
+    collection.innerHTML = creaturesData
       .map(
         (creature) => `
       <li class="creature-card">
@@ -149,18 +147,13 @@ async function fetchData() {
     `,
       )
       .join("");
-
     try {
-      // Save the fetched data to Local Storage
-      localStorage.setItem("creaturesData", JSON.stringify(creatures));
+      localStorage.setItem("creaturesData", JSON.stringify(creaturesData));
     } catch (error) {
-      console.error("Error saving creatures data to Local Storage:", error);
+      console.error("Failed to save creatures data to Local Storage:", error);
     }
   }
 }
-
-fetchData();
-
 // console.log statements to verify that the script is loaded and preferences are applied
 
 console.log("Script loaded successfully.");
