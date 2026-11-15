@@ -65,7 +65,8 @@ collection.innerHTML = html.join("");
 collection.addEventListener("click", (event) => {
   if (event.target.tagName === "IMG") {
     const selectedCreature = event.target.closest(".creature-card");
-    console.log("Selected creature:", selectedCreature);
+    const creatureName = selectedCreature.querySelector("h3").textContent;
+    console.log("Selected creature:", creatureName);
   }
 });
 
@@ -116,6 +117,10 @@ const savedPreferences = {
 
 // fetch data from a JSON file and process it
 async function fetchData() {
+  if (!window.fetch) {
+    console.error("Fetch API is not supported in this browser.");
+    return;
+  }
   // try to fetch the data and handle any errors that may occur
   try {
     const response = await fetch("data/creatures.json");
@@ -124,10 +129,28 @@ async function fetchData() {
   } catch (error) {
     console.error("Error fetching creature data:", error);
   }
+  if (creatures && creatures.length > 0) {
+    // Process the fetched data and update the collection
+    const html = creatures
+      .map(
+        (creature) => `
+      <li class="creature-card">
+        <img src="${creature.image}" alt="${creature.alt}">
+        <h3>${creature.name}</h3>
+        <p>${creature.description}</p>
+      </li>
+    `,
+      )
+      .join("");
+    collection.innerHTML = html;
 
-  const response = await fetch("data/creatures.json");
-  const creatures = await response.json();
-  console.log("Fetched creatures:", creatures);
+    try {
+      // Save the fetched data to Local Storage
+      localStorage.setItem("creaturesData", JSON.stringify(creatures));
+    } catch (error) {
+      console.error("Error saving creatures data to Local Storage:", error);
+    }
+  }
 }
 
 fetchData();
